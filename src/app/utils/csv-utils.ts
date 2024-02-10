@@ -54,6 +54,11 @@ const validateAndParseCSV = (fileName: string, csvString: string): Result => {
 		const rowIndex = i === 0 ? i : i * 2;
 		const row = rows[rowIndex].split(',');
 
+		if (row[3] === '' || row[3].toLowerCase() === 'null') {
+			const todayString = new Date().toISOString().split('T')[0];
+			row[3] = todayString;
+		}
+
 		const rowValidationState: Result = validateRow(row, i);
 		if (rowValidationState.success === false) {
 			return rowValidationState;
