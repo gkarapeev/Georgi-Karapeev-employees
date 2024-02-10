@@ -22,7 +22,7 @@ export const readCSVFile = (e: Event): Promise<Result> => {
 	});
 };
 
-const validateAndParseCSV = (fileName: string, csvString: string): Result => {
+export const validateAndParseCSV = (fileName: string, csvString: string): Result => {
 	if (!fileName.toLowerCase().endsWith('.csv')) {
 		return {
 			success: false,
