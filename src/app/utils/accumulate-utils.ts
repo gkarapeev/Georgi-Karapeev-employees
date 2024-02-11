@@ -2,14 +2,14 @@ import { FinishedOverlap, CumulativeTimePerPairPerProject } from "../../types";
 
 export const accumulateOverlaps = (overlaps: FinishedOverlap[]): CumulativeTimePerPairPerProject[] => {
 	const accumulated = overlaps.reduce((acc, overlap) => {
-		const key = `${overlap.projectId}_${overlap.people.sort().join('-')}`;
+		const key = `${overlap.projectId}_${overlap.pair}`;
 
 		if (acc[key]) {
 			acc[key].cumulativeDurationInDays += overlap.durationInDays;
 		} else {
 			acc[key] = {
 				projectId: overlap.projectId,
-				people: overlap.people.sort(),
+				pair: overlap.pair,
 				cumulativeDurationInDays: overlap.durationInDays,
 			};
 		}

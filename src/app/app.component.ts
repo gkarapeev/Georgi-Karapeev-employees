@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CumulativeTimePerPairPerProject, FinishedOverlap, Result } from '../types';
 import { readCSVFile } from './utils/csv-utils';
-import { accumulateOverlaps, findLongestCumulativeOverlap, processEvents } from './utils/sweep-line';
+import { processEvents } from './utils/sweep-line';
+import { accumulateOverlaps, findLongestCumulativeOverlap } from './utils/accumulate-utils';
 
 @Component({
 	selector: 'app-root',

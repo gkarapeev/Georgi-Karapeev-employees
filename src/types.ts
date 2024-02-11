@@ -19,10 +19,12 @@ export interface Result {
 	payload?: PointInTime[];
 }
 
+export type Pair = string; // e.g. 1-2 where 1 and 2 are EmployeeId's, always sorted by smaller first!
+
 export type Overlap = {
 	projectId: ProjectId;
 	start: Date;
-	people: EmployeeId[];
+	pair: Pair;
 };
 
 export interface FinishedOverlap extends Overlap {
@@ -32,6 +34,6 @@ export interface FinishedOverlap extends Overlap {
 
 export interface CumulativeTimePerPairPerProject {
 	projectId: ProjectId;
-	people: EmployeeId[];
+	pair: Pair;
 	cumulativeDurationInDays: number;
 }

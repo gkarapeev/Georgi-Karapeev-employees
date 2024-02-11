@@ -3,6 +3,7 @@ import {
 	EmployeeId,
 	FinishedOverlap,
 	Overlap,
+	Pair,
 	PointInTime,
 	ProjectId,
 } from '../../types';
@@ -16,7 +17,7 @@ export const processEvents = (projectEvents: PointInTime[]) => {
 	projectEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
 
 	const projectsNow = new Map<ProjectId, EmployeeId[]>();
-	const overlapsNow = new Map<ProjectId, Overlap>();
+	const overlapsNow = new Map<ProjectId, Overlap[]>();
 	const result: FinishedOverlap[] = [];
 
 	projectEvents.forEach((e) => {
@@ -28,11 +29,26 @@ export const processEvents = (projectEvents: PointInTime[]) => {
 				alert(`EmpID ${e.empId} is already working on ${e.projectId}!`);
 			} else if (peopleWorking) {
 				projectsNow.set(e.projectId, [...peopleWorking, e.empId]);
-				overlapsNow.set(e.projectId, {
-					projectId: e.projectId,
-					start: e.date,
-					people: [...new Set([...peopleWorking, e.empId])],
+
+				const newPairs: Pair[] = peopleWorking.map( // A new pair for me + every person working now
+					(workingPersonId) => {
+						return [e.empId, workingPersonId].sort().join('-');
+					}
+				);
+
+				const newOverlaps: Overlap[] = newPairs.map((pair) => {
+					return {
+						projectId: e.projectId,
+						start: e.date,
+						pair: pair,
+					};
 				});
+
+				const projectOverlaps = overlapsNow.get(e.projectId);
+				overlapsNow.set(e.projectId, [
+					...projectOverlaps || [],
+					...newOverlaps,
+				]);
 			} else {
 				projectsNow.set(e.projectId, [e.empId]);
 			}
@@ -54,19 +70,29 @@ export const processEvents = (projectEvents: PointInTime[]) => {
 				projectsNow.delete(e.projectId);
 			}
 
-			const currentOverlap = overlapsNow.get(e.projectId);
-			if (currentOverlap) {
-				// Can't have an overlap if 1 of 2 people is ending
-				const finishedOverlap: FinishedOverlap = {
-					...currentOverlap,
-					end: e.date,
-					durationInDays:
-						(e.date.getTime() - currentOverlap.start.getTime()) /
-						MS_IN_DAY,
-				};
+			const currentOverlaps = overlapsNow.get(e.projectId);
+			if (currentOverlaps) {
+				const finishedOverlaps: FinishedOverlap[] = currentOverlaps
+					.filter((o) => o.pair.indexOf(e.empId.toFixed(0)) !== -1)
+					.map((overlap) => {
+						return {
+							...overlap,
+							end: e.date,
+							durationInDays:
+								(e.date.getTime() - overlap.start.getTime()) /
+								MS_IN_DAY,
+						};
+					});
 
-				result.push(finishedOverlap);
-				overlapsNow.delete(e.projectId);
+				result.push(...finishedOverlaps);
+
+				const remainingOverlaps = currentOverlaps.filter((o) => o.pair.indexOf(e.empId.toFixed(0)) === -1);
+
+				if (remainingOverlaps.length > 0) {
+					overlapsNow.set(e.projectId, remainingOverlaps);
+				} else {
+					overlapsNow.delete(e.projectId);
+				}
 			}
 
 			if (!peopleWorking || !imWorking) {
