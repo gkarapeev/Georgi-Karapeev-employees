@@ -1,5 +1,5 @@
 import {
-	findLongestCoworkingPair
+	findProjectWithLongestCoworking
 } from '../../core-functions/accumulate-utils';
 import { validateAndParseCSV } from '../../core-functions/csv-utils';
 import {
@@ -19,7 +19,7 @@ describe('Three people overlapping', () => {
 	});
 
 	it('should generate correct finished overlaps and longest pair', () => {
-		const longestPair = findLongestCoworkingPair(three_people_overlapping_points);
+		const longestPair = findProjectWithLongestCoworking(three_people_overlapping_points);
 
 		expect(longestPair).toEqual(three_people_overlapping_longest_cumulative_pair);
 	});

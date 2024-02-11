@@ -30,10 +30,16 @@ export type Overlap = {
 export interface FinishedOverlap extends Overlap {
 	end: Date;
 	durationInDays: number;
-};
+}
 
 export interface AccumulatedOverlap {
 	projectId: ProjectId;
 	pair: Pair;
 	cumulativeDurationInDays: number;
+}
+
+export interface AggregatedPairOverlapData {
+	pair: Pair;
+	overlaps: AccumulatedOverlap[];
+	totalDaysWorkingTogether: number;
 }

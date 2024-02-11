@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Result } from '../utils/types';
-import { findLongestCoworkingPair } from '../core-functions/accumulate-utils';
+import { findLongestCoworkingPair } from '../core-functions/longest-coworking-pair';
 import { readCSVFile } from '../core-functions/read-csv-file';
+import { PointInTime, Result } from '../utils/types';
 
 @Component({
 	selector: 'app-root',
@@ -17,8 +17,9 @@ export class AppComponent {
 		const result: Result = await readCSVFile(e);
 		
 		if (result.success) {
-			const longest = findLongestCoworkingPair(result.payload!);
-			console.log(longest);
+			const points: PointInTime[] = result.payload!;
+			const finalAnswer = findLongestCoworkingPair(points);
+			console.log(finalAnswer);
 		} else {
 			alert(result.message);
 		}
