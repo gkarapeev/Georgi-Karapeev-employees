@@ -1,18 +1,40 @@
 <input (change)="handleChange($event)" type="file" accept=".csv, text/csv">
 
-<kendo-grid [data]="gridData">
-    <kendo-grid-column field="person_1" title="Employee ID #1"></kendo-grid-column>
+<kendo-grid
+    [data]="gridView"
+    [loading]="loading"
+    [skip]="skip"
+    [pageSize]="pageSize"
+    scrollable="virtual"
+    [rowHeight]="36"
+    [height]="700"
+>
+    <kendo-grid-column
+        field="person_1"
+        title="Employee ID #1"
+    ></kendo-grid-column>
 
-    <kendo-grid-column field="person_2" title="Employee ID #2"></kendo-grid-column>
+    <kendo-grid-column
+        field="person_2"
+        title="Employee ID #2"
+    ></kendo-grid-column>
 
-    <kendo-grid-column field="totalDaysWorkingTogether" title="Days worked"></kendo-grid-column>
+    <kendo-grid-column
+        field="totalDaysWorkingTogether"
+        title="Days worked"
+    ></kendo-grid-column>
 
     <div *kendoGridDetailTemplate="let dataItem">
         <kendo-grid [data]="dataItem.overlaps">
-            <kendo-grid-column field="projectId" title="Project ID"></kendo-grid-column>
+            <kendo-grid-column
+                field="projectId"
+                title="Project ID"
+            ></kendo-grid-column>
 
-            <kendo-grid-column field="cumulativeDurationInDays"
-                title="Total days worked on this project"></kendo-grid-column>
+            <kendo-grid-column
+                field="cumulativeDurationInDays"
+                title="Total days worked on this project"
+            ></kendo-grid-column>
         </kendo-grid>
     </div>
 </kendo-grid>
