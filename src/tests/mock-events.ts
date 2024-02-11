@@ -1,6 +1,21 @@
 import { FinishedOverlap, PointInTime } from '../types';
 
-export const p11_35days_p22_45days: PointInTime[] = [
+export const test_CSV_empty_end_points: PointInTime[] = [
+	{
+		empId: 1,
+		projectId: 11,
+		date: new Date('2020-01-01T00:00:00.000Z'),
+		pointType: 'start',
+	},
+	{
+		empId: 1,
+		projectId: 11,
+		date: new Date('2024-02-11T00:00:00.000Z'),
+		pointType: 'end',
+	},
+];
+
+export const p11_35days_p22_45days_points: PointInTime[] = [
 	{
 		empId: 1,
 		projectId: 11,
