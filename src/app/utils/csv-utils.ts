@@ -1,4 +1,4 @@
-import { COLUMN_NAMES } from '../../constants';
+import { COLUMN_NAMES, MUST_BE_CSV, MUST_CONTAIN_COMMAS } from '../../constants';
 import { PointInTime, Result } from '../../types';
 
 export const readCSVFile = (e: Event): Promise<Result> => {
@@ -26,14 +26,14 @@ export const validateAndParseCSV = (fileName: string, csvString: string): Result
 	if (!fileName.toLowerCase().endsWith('.csv')) {
 		return {
 			success: false,
-			message: 'File extension must be .csv or .CSV',
+			message: MUST_BE_CSV,
 		};
 	}
 
 	if (!csvString.includes(',')) {
 		return {
 			success: false,
-			message: 'The provided CSV file does not contain any commas.',
+			message: MUST_CONTAIN_COMMAS,
 		};
 	}
 

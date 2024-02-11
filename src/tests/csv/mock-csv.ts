@@ -1,7 +1,6 @@
 import { Result } from '../../types';
-import { validateAndParseCSV } from './csv-utils';
 
-const test_CSV = `EmpID,ProjectID,DateFrom,DateTo
+export const test_CSV = `EmpID,ProjectID,DateFrom,DateTo
 1,11,2020-01-01,2020-02-01
 2,11,2020-01-01,2020-02-01
 1,22,2020-03-01,2020-05-01
@@ -9,7 +8,23 @@ const test_CSV = `EmpID,ProjectID,DateFrom,DateTo
 1,11,2020-06-01,2020-06-10
 2,11,2020-06-05,2020-06-10`;
 
-const expected: Result = {
+export const test_CSV_empty_end = `1,11,2020-01-01,`;
+export const test_CSV_empty_end_event_list: Result['payload'] = [
+	{
+		EmpID: 1,
+		ProjectID: 11,
+		Date: new Date('2020-01-01T00:00:00.000Z'),
+		Type: 'start',
+	},
+	{
+		EmpID: 1,
+		ProjectID: 11,
+		Date: new Date('2024-02-11T00:00:00.000Z'),
+		Type: 'end',
+	},
+];
+
+export const event_list: Result = {
 	success: true,
 	message: 'CSV is valid.',
 	payload: [
@@ -87,10 +102,3 @@ const expected: Result = {
 		},
 	],
 };
-
-describe('csv utils', () => {
-	it('should parse CSV correclty', async () => {
-		const result = await validateAndParseCSV('test.csv', test_CSV);
-		expect(result).toEqual(expected);
-	});
-});
