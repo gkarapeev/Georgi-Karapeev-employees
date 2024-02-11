@@ -43,3 +43,8 @@ export interface AggregatedPairOverlapData {
 	overlaps: AccumulatedOverlap[];
 	totalDaysWorkingTogether: number;
 }
+
+export interface OverlapGridData extends AggregatedPairOverlapData {
+	person_1: EmployeeId;
+	person_2: EmployeeId;
+}

@@ -1,8 +1,7 @@
 import {
-	FinishedOverlap,
 	AccumulatedOverlap,
-	PointInTime,
-	AggregatedPairOverlapData,
+	FinishedOverlap,
+	PointInTime
 } from '../utils/types';
 import { processEvents } from './sweep-line';
 
@@ -49,30 +48,6 @@ export const findLongestCumulativeOverlap = (
 		},
 		[accumulated[0]]
 	);
-};
-
-export const aggregatePairOverlapData = (
-	overlaps: AccumulatedOverlap[]
-): AggregatedPairOverlapData[] => {
-	const pairMap: { [pair: string]: AggregatedPairOverlapData } = {};
-
-	for (const overlap of overlaps) {
-		if (!pairMap[overlap.pair]) {
-			pairMap[overlap.pair] = {
-				pair: overlap.pair,
-				overlaps: [],
-				totalDaysWorkingTogether: 0,
-			};
-		}
-
-		pairMap[overlap.pair].totalDaysWorkingTogether +=
-			overlap.cumulativeDurationInDays;
-		
-		pairMap[overlap.pair].overlaps.push(overlap);
-	}
-
-	const aggregatedData = Object.values(pairMap);
-	return aggregatedData;
 };
 
 export const findProjectWithLongestCoworking = (
