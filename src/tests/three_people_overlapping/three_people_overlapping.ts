@@ -1,9 +1,9 @@
 import { AccumulatedOverlap, FinishedOverlap, PointInTime } from "../../utils/types";
 
 export const three_people_overlapping_csv = `EmpID,ProjectID,DateFrom,DateTo
-1,11,2020-01-01,2020-02-01
-2,11,2020-01-15,2020-01-20
-3,11,2020-01-01,2020-02-15`;
+1,11,2020-01-01T00:00:00.000Z,2020-02-01T00:00:00.000Z
+2,11,2020-01-15T00:00:00.000Z,2020-01-20T00:00:00.000Z
+3,11,2020-01-01T00:00:00.000Z,2020-02-15T00:00:00.000Z`;
 
 export const three_people_overlapping_points: PointInTime[] = [
 	{

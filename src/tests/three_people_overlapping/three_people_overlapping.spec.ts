@@ -1,15 +1,11 @@
 import {
-	accumulateOverlaps,
-	findLongestCoworkingPair,
-	findLongestCumulativeOverlap,
+	findLongestCoworkingPair
 } from '../../core-functions/accumulate-utils';
 import { validateAndParseCSV } from '../../core-functions/csv-utils';
-import { processEvents } from '../../core-functions/sweep-line';
 import {
 	three_people_overlapping_csv,
-	three_people_overlapping_finished_overlaps,
 	three_people_overlapping_longest_cumulative_pair,
-	three_people_overlapping_points,
+	three_people_overlapping_points
 } from './three_people_overlapping';
 
 describe('Three people overlapping', () => {
