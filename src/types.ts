@@ -29,3 +29,9 @@ export interface FinishedOverlap extends Overlap {
 	end: Date;
 	durationInDays: number;
 };
+
+export interface CumulativeTimePerPairPerProject {
+	projectId: ProjectId;
+	people: EmployeeId[];
+	cumulativeDurationInDays: number;
+}

@@ -1,5 +1,6 @@
 import { MS_IN_DAY } from '../../constants';
 import {
+	CumulativeTimePerPairPerProject,
 	EmployeeId,
 	FinishedOverlap,
 	Overlap,
@@ -81,12 +82,30 @@ export const processEvents = (projectEvents: PointInTime[]) => {
 	return result;
 };
 
-// TODO: dont return longest overlap! Return the cumulative overlap time of the two people!
-export const findLongestOverlap = (
-	overlaps: FinishedOverlap[]
-): FinishedOverlap => {
+export const accumulateOverlaps = (overlaps: FinishedOverlap[]): CumulativeTimePerPairPerProject[] => {
+	const accumulated = overlaps.reduce((acc, overlap) => {
+		const key = `${overlap.projectId}_${overlap.people.sort().join('-')}`;
+
+		if (acc[key]) {
+			acc[key].cumulativeDurationInDays += overlap.durationInDays;
+		} else {
+			acc[key] = {
+				projectId: overlap.projectId,
+				people: overlap.people.sort(),
+				cumulativeDurationInDays: overlap.durationInDays,
+			};
+		}
+		return acc;
+	}, {} as { [key: string]: CumulativeTimePerPairPerProject });
+
+	return Object.values(accumulated);
+};
+
+export const findLongestCumulativeOverlap = (
+	overlaps: CumulativeTimePerPairPerProject[]
+): CumulativeTimePerPairPerProject => {
 	return overlaps.reduce((longest, current) => {
-		return current.durationInDays > longest.durationInDays
+		return current.cumulativeDurationInDays > longest.cumulativeDurationInDays
 			? current
 			: longest;
 	}, overlaps[0]);
