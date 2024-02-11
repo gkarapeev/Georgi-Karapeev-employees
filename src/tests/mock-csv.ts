@@ -1,4 +1,4 @@
-import { Result } from '../types';
+import { PointInTime, Result } from '../types';
 
 export const test_CSV = `EmpID,ProjectID,DateFrom,DateTo
 1,11,2020-01-01,2020-02-01
@@ -9,7 +9,7 @@ export const test_CSV = `EmpID,ProjectID,DateFrom,DateTo
 2,11,2020-06-05,2020-06-10`;
 
 export const test_CSV_empty_end = `1,11,2020-01-01,`;
-export const test_CSV_empty_end_event_list: Result['payload'] = [
+export const test_CSV_empty_end_event_list: PointInTime[] = [
 	{
 		empId: 1,
 		projectId: 11,

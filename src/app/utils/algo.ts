@@ -7,15 +7,16 @@ import {
 	ProjectId,
 } from '../../types';
 
+// TODO: make individual internals of the algorithm testable, e.g:
+// if event end, but other people working:
+// - remove me from peopleWorking
+// - project is still in projectsNow
 export const processEvents = (projectEvents: PointInTime[]) => {
 	projectEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
 
 	const projectsNow = new Map<ProjectId, EmployeeId[]>();
 	const overlapsNow = new Map<ProjectId, Overlap>();
 	const result: FinishedOverlap[] = [];
-
-	// TODO: row can't be valid if same person is already working on same project and you claim it's a start
-	// Same for end
 
 	projectEvents.forEach((e) => {
 		const peopleWorking = projectsNow.get(e.projectId);
@@ -80,6 +81,7 @@ export const processEvents = (projectEvents: PointInTime[]) => {
 	return result;
 };
 
+// TODO: dont return longest overlap! Return the cumulative overlap time of the two people!
 export const findLongestOverlap = (
 	overlaps: FinishedOverlap[]
 ): FinishedOverlap => {

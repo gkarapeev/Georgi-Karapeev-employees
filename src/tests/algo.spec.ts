@@ -1,3 +1,12 @@
-// if event end, but other people working:
-// - remove me from peopleWorking
-// - project is still in projectsNow
+import { processEvents } from '../app/utils/algo';
+import {
+	p11_35days_p22_45days,
+	p11_35days_p22_45days_overlaps,
+} from './mock-events';
+
+describe('Sweep line algorithm', () => {
+	it('should match input and output', () => {
+		const result = processEvents(p11_35days_p22_45days);
+		expect(result).toEqual(p11_35days_p22_45days_overlaps);
+	});
+});
