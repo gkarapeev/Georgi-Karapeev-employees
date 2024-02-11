@@ -1,4 +1,5 @@
-import { FinishedOverlap, AccumulatedOverlap } from "../../types";
+import { FinishedOverlap, AccumulatedOverlap, PointInTime } from "../../types";
+import { processEvents } from "./sweep-line";
 
 export const accumulateOverlaps = (overlaps: FinishedOverlap[]): AccumulatedOverlap[] => {
 	const accumulated = overlaps.reduce((acc, overlap) => {
@@ -20,14 +21,20 @@ export const accumulateOverlaps = (overlaps: FinishedOverlap[]): AccumulatedOver
 };
 
 export const findLongestCumulativeOverlap = (
-	overlaps: AccumulatedOverlap[]
+	overlaps: FinishedOverlap[]
 ): AccumulatedOverlap[] => {
-	return overlaps.reduce((longest, current) => {
+	const accumulated = accumulateOverlaps(overlaps);
+
+	return accumulated.reduce((longest, current) => {
 		if (current.cumulativeDurationInDays === longest[0].cumulativeDurationInDays) {
 			const isSame = current.pair === longest[0].pair;
 			return isSame ? longest : [...longest, current];
 		}
 
 		return current.cumulativeDurationInDays > longest[0].cumulativeDurationInDays ? [current] : longest;
-	}, [overlaps[0]]);
+	}, [accumulated[0]]);
+};
+
+export const findLongestCoworkingPair = (points: PointInTime[]): AccumulatedOverlap[] => {
+	return findLongestCumulativeOverlap(processEvents(points));
 };

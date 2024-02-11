@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AccumulatedOverlap, FinishedOverlap, Result } from '../types';
+import { Result } from '../types';
+import { findLongestCoworkingPair } from './utils/accumulate-utils';
 import { readCSVFile } from './utils/csv-utils';
-import { processEvents } from './utils/sweep-line';
-import { accumulateOverlaps, findLongestCumulativeOverlap } from './utils/accumulate-utils';
 
 @Component({
 	selector: 'app-root',
@@ -18,10 +17,8 @@ export class AppComponent {
 		const result: Result = await readCSVFile(e);
 		
 		if (result.success) {
-			const overlaps: FinishedOverlap[] = processEvents(result.payload!);
-			const accumulatedOverlaps = accumulateOverlaps(overlaps); // TODO: move this into the method below
-			const longestCumulativeOverlap: AccumulatedOverlap[] = findLongestCumulativeOverlap(accumulatedOverlaps);
-			console.log(longestCumulativeOverlap);
+			const longest = findLongestCoworkingPair(result.payload!);
+			console.log(longest);
 		} else {
 			alert(result.message);
 		}
