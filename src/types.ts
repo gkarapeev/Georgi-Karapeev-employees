@@ -32,7 +32,7 @@ export interface FinishedOverlap extends Overlap {
 	durationInDays: number;
 };
 
-export interface CumulativeTimePerPairPerProject {
+export interface AccumulatedOverlap {
 	projectId: ProjectId;
 	pair: Pair;
 	cumulativeDurationInDays: number;

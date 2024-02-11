@@ -8,14 +8,11 @@ import {
 	ProjectId,
 } from '../../types';
 
-// MASSIVE TODO: make it work with 2+ people!
 // TODO: make individual internals of the algorithm testable, e.g:
 // if event end, but other people working:
 // - remove me from peopleWorking
 // - project is still in projectsNow
 export const processEvents = (projectEvents: PointInTime[]) => {
-	projectEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
-
 	const projectsNow = new Map<ProjectId, EmployeeId[]>();
 	const overlapsNow = new Map<ProjectId, Overlap[]>();
 	const result: FinishedOverlap[] = [];

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { CumulativeTimePerPairPerProject, FinishedOverlap, Result } from '../types';
+import { AccumulatedOverlap, FinishedOverlap, Result } from '../types';
 import { readCSVFile } from './utils/csv-utils';
 import { processEvents } from './utils/sweep-line';
 import { accumulateOverlaps, findLongestCumulativeOverlap } from './utils/accumulate-utils';
@@ -19,8 +19,8 @@ export class AppComponent {
 		
 		if (result.success) {
 			const overlaps: FinishedOverlap[] = processEvents(result.payload!);
-			const accumulatedOverlaps = accumulateOverlaps(overlaps);
-			const longestCumulativeOverlap: CumulativeTimePerPairPerProject = findLongestCumulativeOverlap(accumulatedOverlaps);
+			const accumulatedOverlaps = accumulateOverlaps(overlaps); // TODO: move this into the method below
+			const longestCumulativeOverlap: AccumulatedOverlap[] = findLongestCumulativeOverlap(accumulatedOverlaps);
 			console.log(longestCumulativeOverlap);
 		} else {
 			alert(result.message);

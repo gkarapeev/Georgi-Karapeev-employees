@@ -1,6 +1,6 @@
-import { FinishedOverlap, CumulativeTimePerPairPerProject } from "../../types";
+import { FinishedOverlap, AccumulatedOverlap } from "../../types";
 
-export const accumulateOverlaps = (overlaps: FinishedOverlap[]): CumulativeTimePerPairPerProject[] => {
+export const accumulateOverlaps = (overlaps: FinishedOverlap[]): AccumulatedOverlap[] => {
 	const accumulated = overlaps.reduce((acc, overlap) => {
 		const key = `${overlap.projectId}_${overlap.pair}`;
 
@@ -14,17 +14,20 @@ export const accumulateOverlaps = (overlaps: FinishedOverlap[]): CumulativeTimeP
 			};
 		}
 		return acc;
-	}, {} as { [key: string]: CumulativeTimePerPairPerProject });
+	}, {} as { [key: string]: AccumulatedOverlap });
 
 	return Object.values(accumulated);
 };
 
 export const findLongestCumulativeOverlap = (
-	overlaps: CumulativeTimePerPairPerProject[]
-): CumulativeTimePerPairPerProject => {
+	overlaps: AccumulatedOverlap[]
+): AccumulatedOverlap[] => {
 	return overlaps.reduce((longest, current) => {
-		return current.cumulativeDurationInDays > longest.cumulativeDurationInDays
-			? current
-			: longest;
-	}, overlaps[0]);
+		if (current.cumulativeDurationInDays === longest[0].cumulativeDurationInDays) {
+			const isSame = current.pair === longest[0].pair;
+			return isSame ? longest : [...longest, current];
+		}
+
+		return current.cumulativeDurationInDays > longest[0].cumulativeDurationInDays ? [current] : longest;
+	}, [overlaps[0]]);
 };

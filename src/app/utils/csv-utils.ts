@@ -68,10 +68,12 @@ export const validateAndParseCSV = (fileName: string, csvString: string): Result
 		rows.splice(rowIndex, 1, start as any, end as any); // Updating in-place for performance.
 	}
 
+	(rows as any as PointInTime[]).sort((a, b) => a.date.getTime() - b.date.getTime());
+
 	return {
 		success: true,
 		message: 'CSV is valid.',
-		payload: rows as any as PointInTime[],
+		payload: (rows as any as PointInTime[])
 	};
 };
 
