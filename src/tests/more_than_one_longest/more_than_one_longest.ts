@@ -1,4 +1,4 @@
-import { AccumulatedOverlap, FinishedOverlap, PointInTime } from '../../types';
+import { AccumulatedOverlap, FinishedOverlap, PointInTime } from '../../utils/types';
 
 export const more_than_one_longest_csv = `EmpID,ProjectID,DateFrom,DateTo
 1,11,2020-01-01,2020-01-10

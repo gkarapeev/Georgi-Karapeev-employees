@@ -1,4 +1,4 @@
-import { findLongestCoworkingPair } from '../../app/utils/accumulate-utils';
+import { findLongestCoworkingPair } from '../../core-functions/accumulate-utils';
 import {
 	more_than_one_longest_points
 } from './more_than_one_longest';

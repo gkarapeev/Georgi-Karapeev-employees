@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Result } from '../types';
-import { findLongestCoworkingPair } from './utils/accumulate-utils';
-import { readCSVFile } from './utils/csv-utils';
+import { Result } from '../utils/types';
+import { findLongestCoworkingPair } from '../core-functions/accumulate-utils';
+import { readCSVFile } from '../core-functions/read-csv-file';
 
 @Component({
 	selector: 'app-root',

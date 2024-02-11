@@ -2,9 +2,9 @@ import {
 	accumulateOverlaps,
 	findLongestCoworkingPair,
 	findLongestCumulativeOverlap,
-} from '../../app/utils/accumulate-utils';
-import { validateAndParseCSV } from '../../app/utils/csv-utils';
-import { processEvents } from '../../app/utils/sweep-line';
+} from '../../core-functions/accumulate-utils';
+import { validateAndParseCSV } from '../../core-functions/csv-utils';
+import { processEvents } from '../../core-functions/sweep-line';
 import {
 	three_people_overlapping_csv,
 	three_people_overlapping_finished_overlaps,

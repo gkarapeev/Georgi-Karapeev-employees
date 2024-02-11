@@ -1,4 +1,4 @@
-import { AccumulatedOverlap, FinishedOverlap, PointInTime } from '../../types';
+import { AccumulatedOverlap, FinishedOverlap, PointInTime } from '../../utils/types';
 
 export const merged_intervals_csv: string = ``;
 

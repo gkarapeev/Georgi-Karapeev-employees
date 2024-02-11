@@ -1,4 +1,4 @@
-import { FinishedOverlap, AccumulatedOverlap, PointInTime } from "../../types";
+import { FinishedOverlap, AccumulatedOverlap, PointInTime } from "../utils/types";
 import { processEvents } from "./sweep-line";
 
 export const accumulateOverlaps = (overlaps: FinishedOverlap[]): AccumulatedOverlap[] => {

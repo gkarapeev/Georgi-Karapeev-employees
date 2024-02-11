@@ -1,5 +1,5 @@
-import { validateAndParseCSV } from '../../app/utils/csv-utils';
-import { MUST_BE_CSV } from '../../constants';
+import { validateAndParseCSV } from '../../core-functions/csv-utils';
+import { MUST_BE_CSV } from '../../utils/constants';
 
 describe('non-csv-extension', () => {
 	it('should prevent non-csv file extension', () => {

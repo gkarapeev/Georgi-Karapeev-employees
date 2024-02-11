@@ -1,4 +1,4 @@
-import { MS_IN_DAY } from '../../constants';
+import { MS_IN_DAY } from '../utils/constants';
 import {
 	EmployeeId,
 	FinishedOverlap,
@@ -6,12 +6,9 @@ import {
 	Pair,
 	PointInTime,
 	ProjectId,
-} from '../../types';
+} from '../utils/types';
 
-// TODO: make individual internals of the algorithm testable, e.g:
-// if event end, but other people working:
-// - remove me from peopleWorking
-// - project is still in projectsNow
+// TODO: make individual parts of the algorithm more testable.
 export const processEvents = (projectEvents: PointInTime[]) => {
 	const projectsNow = new Map<ProjectId, EmployeeId[]>();
 	const overlapsNow = new Map<ProjectId, Overlap[]>();

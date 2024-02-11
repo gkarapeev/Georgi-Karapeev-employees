@@ -1,4 +1,4 @@
-import { validateAndParseCSV } from '../../app/utils/csv-utils';
+import { validateAndParseCSV } from '../../core-functions/csv-utils';
 import { empty_end_date_csv, empty_end_date_points } from '../empty_end_date/empty_end_date';
 
 describe('Empty or NULL end date', () => {
