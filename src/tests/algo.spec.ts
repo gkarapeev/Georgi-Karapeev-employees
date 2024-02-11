@@ -1,4 +1,4 @@
-import { accumulateOverlaps, processEvents } from '../app/utils/algo';
+import { accumulateOverlaps, processEvents } from '../app/utils/sweep-line';
 import { CumulativeTimePerPairPerProject } from '../types';
 import {
 	p11_35days_p22_45days_points,
