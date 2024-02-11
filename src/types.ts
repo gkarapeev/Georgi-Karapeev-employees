@@ -1,16 +1,16 @@
 import { COLUMN_NAMES } from './constants';
 
-type ProjectEventType = 'start' | 'end';
+type PointType = 'start' | 'end';
 
 export type ColumnName = (typeof COLUMN_NAMES)[number];
 export type EmployeeId = number;
 export type ProjectId = number;
 
 export interface PointInTime {
-	EmpID: EmployeeId;
-	ProjectID: ProjectId;
-	Date: Date;
-	Type: ProjectEventType;
+	empId: EmployeeId;
+	projectId: ProjectId;
+	date: Date;
+	pointType: PointType;
 }
 
 export interface Result {
@@ -19,7 +19,13 @@ export interface Result {
 	payload?: PointInTime[];
 }
 
-export type OverlapInfo = {
+export type Overlap = {
+	projectId: ProjectId;
 	start: Date;
-	duration?: number;
+	people: EmployeeId[];
+};
+
+export interface FinishedOverlap extends Overlap {
+	end: Date;
+	durationInDays: number;
 };

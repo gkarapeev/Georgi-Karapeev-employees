@@ -78,16 +78,16 @@ export const validateAndParseCSV = (fileName: string, csvString: string): Result
 const makeEvents = (columns: string[]): [PointInTime, PointInTime] => {
 	return [
 		{
-			EmpID: Number(columns[0]),
-			ProjectID: Number(columns[1]),
-			Date: new Date(columns[2]),
-			Type: 'start',
+			empId: Number(columns[0]),
+			projectId: Number(columns[1]),
+			date: new Date(columns[2]),
+			pointType: 'start',
 		},
 		{
-			EmpID: Number(columns[0]),
-			ProjectID: Number(columns[1]),
-			Date: new Date(columns[3]),
-			Type: 'end',
+			empId: Number(columns[0]),
+			projectId: Number(columns[1]),
+			date: new Date(columns[3]),
+			pointType: 'end',
 		},
 	];
 };

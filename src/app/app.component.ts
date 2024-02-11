@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Result } from '../types';
+import { FinishedOverlap, Result } from '../types';
 import { readCSVFile } from './utils/csv-utils';
-import { processEvents } from './utils/algo-utils';
+import { findLongestOverlap, processEvents } from './utils/algo';
 
 @Component({
 	selector: 'app-root',
@@ -17,8 +17,9 @@ export class AppComponent {
 		const result: Result = await readCSVFile(e);
 		
 		if (result.success) {
-			const solution = processEvents(result.payload!);
-			console.log(solution);
+			const overlaps: FinishedOverlap[] = processEvents(result.payload!);
+			const longestOverlap: FinishedOverlap = findLongestOverlap(overlaps);
+			console.log(longestOverlap);
 		} else {
 			alert(result.message);
 		}

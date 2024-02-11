@@ -1,5 +1,5 @@
-import { validateAndParseCSV } from '../../app/utils/csv-utils';
-import { MUST_BE_CSV } from '../../constants';
+import { validateAndParseCSV } from '../app/utils/csv-utils';
+import { MUST_BE_CSV } from '../constants';
 import { event_list, test_CSV, test_CSV_empty_end, test_CSV_empty_end_event_list } from './mock-csv';
 
 describe('csv utils', () => {
