@@ -1,4 +1,4 @@
 # Georgi Karapeev Employees
 
-- Run `yarn`
-- Open `http://localhost:4200/`
+- Run `yarn` and open `http://localhost:4200/` to see the app
+- Run `yarn test` to fire the automated tests
