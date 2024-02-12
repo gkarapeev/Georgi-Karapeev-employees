@@ -5,3 +5,10 @@
 body > :nth-child(4) {
 	display: none !important;
 }
+
+body {
+	height: 100vh;
+	margin: 0;
+	padding: 10px;
+	box-sizing: border-box;
+}

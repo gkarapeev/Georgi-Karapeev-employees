@@ -1,4 +1,48 @@
-<input (change)="handleChange($event)" type="file" accept=".csv, text/csv">
+<kendo-appbar position="top">
+    <kendo-appbar-section>
+        <h1 class="title">Employee Coworking Time Calculator</h1>
+    </kendo-appbar-section>
+
+    <kendo-appbar-spacer></kendo-appbar-spacer>
+
+    <kendo-appbar-section>
+        <kendo-avatar [imageSrc]="'../assets/logo.png'" shape="circle" width="26px" height="26px"></kendo-avatar>
+    </kendo-appbar-section>
+</kendo-appbar>
+
+<kendo-fileselect
+    *ngIf="!currentFile"
+    (valueChange)="loadCSV($event)"
+    accept=".csv, text/csv"
+></kendo-fileselect>
+
+<div
+    id="file-section"
+    *ngIf="currentFile"
+    [class.ready]="performanceStats.time"
+>
+    <div id="info">
+        <span id="file-name">{{ currentFile.name }}</span>
+
+        <div class="file-stats">
+            <span>Last modified: <span class="value">{{ currentFile.lastModified | date: 'dd MMM yyy, hh:mm:ss' }}</span></span>
+            <span>Size: <span class="value">{{ currentFile.size }} bytes</span></span>
+        </div>
+        
+        <div class="file-stats">
+            <ng-container *ngIf="performanceStats.time; else processing">
+                <span>File length: <span class="value">{{ performanceStats.numberOfRows }} rows</span></span>
+                <span>Processed in: <span class="value">{{ performanceStats.time }} ms</span></span>    
+            </ng-container>
+
+            <ng-template #processing>
+                <span>Processing file...</span>
+            </ng-template>
+        </div>   
+    </div>
+
+    <button kendoButton [svgIcon]="xIcon" (click)="reset()"></button>
+</div>
 
 <kendo-grid
     [data]="gridView"
@@ -7,7 +51,7 @@
     [pageSize]="pageSize"
     scrollable="virtual"
     [rowHeight]="36"
-    [height]="700"
+    [height]="gridHeight"
 >
     <kendo-grid-column
         field="person_1"
@@ -22,7 +66,9 @@
     <kendo-grid-column
         field="totalDaysWorkingTogether"
         title="Days worked"
-    ></kendo-grid-column>
+    >
+        <ng-template kendoGridCellTemplate let-dataItem> {{ dataItem.totalDaysWorkingTogether.toFixed(0) }} </ng-template>
+    </kendo-grid-column>
 
     <div *kendoGridDetailTemplate="let dataItem">
         <kendo-grid [data]="dataItem.overlaps">
@@ -34,7 +80,9 @@
             <kendo-grid-column
                 field="cumulativeDurationInDays"
                 title="Total days worked on this project"
-            ></kendo-grid-column>
+            >
+                <ng-template kendoGridCellTemplate let-dataItem> {{ dataItem.cumulativeDurationInDays.toFixed(0) }} </ng-template>
+            </kendo-grid-column>
         </kendo-grid>
     </div>
 </kendo-grid>

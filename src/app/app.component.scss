@@ -1,0 +1,78 @@
+app-root {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.title {
+	font-size: 18px;
+	margin: 0;
+	font-family: sans-serif;
+	font-weight: 500;
+	line-height: 1.2;
+	color: #424242;
+}
+
+#toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    font-family: sans-serif;
+}
+
+kendo-fileselect {
+    .k-upload-button-wrap {
+        order: 2;
+    }
+
+    .k-dropzone-hint {
+        text-align: start;
+    }
+
+    flex-grow: 1;
+}
+
+#file-section {
+	border: 1px solid #dee2e6;
+	height: 56px;
+	box-sizing: border-box;
+	font-family: sans-serif;
+	color: #424242;
+
+	display: flex;
+	justify-content: space-between;
+    align-items: center;
+	padding: 8px;
+    background-color: #fbffe8;
+
+
+    &.ready {
+        background-color: #e8ffea;
+    }
+}
+
+#info {
+    display: flex;
+    align-items: center;
+}
+
+#file-name {
+	font-size: 28px;
+	font-family: sans-serif;
+	font-weight: 500;
+    border-radius: 4px;
+    padding: 4px 20px;
+    background-color: #c6e3c9;
+}
+
+.file-stats {
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    font-size: 12px;
+
+    .value {
+        font-weight: 600;
+    }
+}
