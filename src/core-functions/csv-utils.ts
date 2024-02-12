@@ -10,9 +10,17 @@ export const makeEvents = (columns: string[], dateFormat: DateFormat): [PointInT
 	const startDate = parse(columns[2], dateFormat!, new Date());
 	const endDate = parse(columns[3], dateFormat!, new Date());
 
+	// TODO: Move these validations outside of here and into validateRow
 	const invalid = [startDate, endDate].find(d => !(d instanceof Date) || isNaN(d.getTime()));
 	if (invalid) {
 		const message = `Could not parse ${columns[2]} or ${columns[3]} as a valid date.`;
+		alert(message);
+		throw new Error(message);
+	}
+
+	// TODO: Write test
+	if (startDate > endDate) {
+		const message = `Start date ${columns[2]} is greater than end date ${columns[3]}.`;
 		alert(message);
 		throw new Error(message);
 	}
