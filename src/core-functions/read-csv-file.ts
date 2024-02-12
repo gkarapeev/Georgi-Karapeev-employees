@@ -1,5 +1,5 @@
-import { Result } from "../utils/types";
-import { validateAndParseCSV } from "./csv-utils";
+import { Result } from '../utils/types';
+import { parseCSV } from './parse-csv';
 
 export const readCSVFile = (file: File): Promise<Result> => {
 	return new Promise((resolve) => {
@@ -7,7 +7,7 @@ export const readCSVFile = (file: File): Promise<Result> => {
 
 		reader.onload = function (ev) {
 			const csvString = ev.target!.result as string;
-			const result: Result = validateAndParseCSV(file.name, csvString);
+			const result: Result = parseCSV(file.name, csvString);
 
 			resolve(result);
 		};

@@ -1,7 +1,7 @@
 import {
 	findProjectWithLongestCoworking
 } from '../../core-functions/accumulate-utils';
-import { validateAndParseCSV } from '../../core-functions/csv-utils';
+import { parseCSV } from '../../core-functions/parse-csv';
 import {
 	three_people_overlapping_csv,
 	three_people_overlapping_longest_cumulative_pair,
@@ -10,7 +10,7 @@ import {
 
 describe('Three people overlapping', () => {
 	it('should parse csv correctly', () => {
-		const result = validateAndParseCSV(
+		const result = parseCSV(
 			'three_people_overlapping.csv',
 			three_people_overlapping_csv
 		);
